@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Plant Disease Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-leaf me-2"></i>Plant Disease Detective
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card about-card">
+                    <div class="card-body p-5">
+                        <h1 class="text-center mb-4">About Plant Disease Detective</h1>
+                        
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <img src="{{ url_for('static', filename='img/about-image.svg') }}" alt="About Plant Disease Detective" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-6">
+                                <h3>Our Mission</h3>
+                                <p>Plant Disease Detective aims to empower farmers, gardeners, and plant enthusiasts with AI-powered technology to quickly identify plant diseases and implement effective treatments.</p>
+                                <p>By providing accurate disease detection and tailored recommendations, we help increase crop yields, reduce pesticide use, and promote sustainable agricultural practices.</p>
+                            </div>
+                        </div>
+                        
+                        <h3 class="mb-4">The Technology Behind Plant Disease Detective</h3>
+                        <p>Our platform uses a convolutional neural network (CNN) trained on thousands of plant images to identify 33 different types of plant diseases across various crops including:</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="plant-category">
+                                    <h5><i class="fas fa-apple-alt me-2"></i>Fruit Plants</h5>
+                                    <ul>
+                                        <li>Apple</li>
+                                        <li>Cherry</li>
+                                        <li>Grape</li>
+                                        <li>Peach</li>
+                                        <li>Strawberry</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="plant-category">
+                                    <h5><i class="fas fa-carrot me-2"></i>Vegetables</h5>
+                                    <ul>
+                                        <li>Tomato</li>
+                                        <li>Potato</li>
+                                        <li>Pepper</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="plant-category">
+                                    <h5><i class="fas fa-seedling me-2"></i>Field Crops</h5>
+                                    <ul>
+                                        <li>Corn</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accuracy-section mt-5">
+                            <h3 class="mb-4">Model Performance</h3>
+                            <p>Our deep learning model achieves over 95% accuracy in detecting plant diseases across our test dataset. The model was trained using data augmentation techniques to ensure robustness across different lighting conditions, angles, and backgrounds.</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="stat-card">
+                                        <div class="stat-value">95%+</div>
+                                        <div class="stat-label">Model Accuracy</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="stat-card">
+                                        <div class="stat-value">33</div>
+                                        <div class="stat-label">Disease Classes</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="disclaimer-section mt-5">
+                            <h3 class="mb-3">Disclaimer</h3>
+                            <p>While our AI model provides highly accurate results, it should be used as a diagnostic aid rather than a replacement for professional consultation. For serious or widespread plant issues, we recommend consulting with a local agricultural extension service or plant pathologist.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><i class="fas fa-leaf me-2"></i>Plant Disease Detective</h4>
+                    <p>AI-powered plant disease detection and treatment recommendations.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2025 Plant Disease Detective. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-leaf me-2"></i>Plant Disease Detective
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1>Detect Plant Diseases Instantly</h1>
+                    <p class="lead">Upload an image of your plant and our AI will diagnose any potential diseases and provide treatment recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="card upload-card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Upload Plant Image</h3>
+                        
+                        <div class="upload-area" id="upload-area">
+                            <div class="dashed-border" id="dropzone">
+                                <div class="upload-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <p>Drag & drop an image here or click to browse</p>
+                                <input type="file" id="file-input" accept="image/png, image/jpeg, image/jpg" hidden>
+                                <button class="btn btn-primary btn-upload" id="browse-btn">Browse Files</button>
+                            </div>
+                        </div>
+
+                        <div class="preview-area" id="preview-area" style="display: none;">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <img id="preview-image" src="#" alt="Preview" class="img-fluid rounded">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="mb-0" id="filename">image.jpg</h5>
+                                        <button class="btn btn-sm btn-outline-danger" id="remove-btn">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-success" id="analyze-btn">
+                                            Analyze Image
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="loading-area text-center py-5" id="loading-area" style="display: none;">
+                            <div class="spinner-border text-primary mb-3" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p>Analyzing your plant image...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-8 mx-auto">
+                <div class="card result-card" id="result-card" style="display: none;">
+                    <div class="card-body">
+                        <div class="result-header">
+                            <h3 class="card-title">Analysis Results</h3>
+                            <span class="badge" id="result-badge">Healthy</span>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-5">
+                                <img id="result-image" src="#" alt="Analyzed Plant" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-7">
+                                <h4 id="result-class">Plant Status</h4>
+                                <div class="confidence-bar mt-2 mb-3">
+                                    <div class="progress">
+                                        <div id="confidence-progress" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-1">
+                                        <small>Confidence</small>
+                                        <small id="confidence-value">0%</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="recommendation-box mt-4">
+                                    <h5><i class="fas fa-clipboard-list me-2"></i>Recommendations</h5>
+                                    <p id="recommendation-text">Loading recommendations...</p>
+                                </div>
+                                
+                                <div class="d-grid gap-2 mt-4">
+                                    <button class="btn btn-primary" id="analyze-another-btn">
+                                        Analyze Another Image
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5 mb-5">
+            <div class="col-lg-10 mx-auto">
+                <div class="info-section">
+                    <h2 class="text-center mb-4">How It Works</h2>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card info-card">
+                                <div class="card-body text-center">
+                                    <div class="info-icon">
+                                        <i class="fas fa-camera"></i>
+                                    </div>
+                                    <h5 class="card-title">Take a Photo</h5>
+                                    <p class="card-text">Capture a clear image of the affected plant leaf or area showing symptoms.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card info-card">
+                                <div class="card-body text-center">
+                                    <div class="info-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </div>
+                                    <h5 class="card-title">Upload Image</h5>
+                                    <p class="card-text">Upload the photo to our platform for instant AI-powered analysis.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card info-card">
+                                <div class="card-body text-center">
+                                    <div class="info-icon">
+                                        <i class="fas fa-leaf"></i>
+                                    </div>
+                                    <h5 class="card-title">Get Results</h5>
+                                    <p class="card-text">Receive diagnosis results and customized treatment recommendations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4><i class="fas fa-leaf me-2"></i>Plant Disease Detective</h4>
+                    <p>AI-powered plant disease detection and treatment recommendations.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2025 Plant Disease Detective. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
